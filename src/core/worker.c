@@ -718,7 +718,7 @@ QuicWorkerPoolInitialize(
     //
 
     for (uint16_t i = 0; i < WorkerCount; i++) {
-        Status = QuicWorkerInitialize(Owner, ThreadFlags, i, &WorkerPool->Workers[i]);
+        Status = QuicWorkerInitialize(Owner, ThreadFlags, (i + 2) % WorkerCount, &WorkerPool->Workers[i]);
         if (QUIC_FAILED(Status)) {
             for (uint16_t j = 0; j < i; j++) {
                 QuicWorkerUninitialize(&WorkerPool->Workers[j]);
