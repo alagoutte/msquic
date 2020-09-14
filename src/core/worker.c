@@ -41,6 +41,7 @@ QuicWorkerInitialize(
     _In_opt_ const void* Owner,
     _In_ uint16_t ThreadFlags,
     _In_ uint16_t IdealProcessor,
+    _In_ uint16_t MaxProcs,
     _Inout_ QUIC_WORKER* Worker
     )
 {
@@ -71,6 +72,8 @@ QuicWorkerInitialize(
     if (QUIC_FAILED(Status)) {
         goto Error;
     }
+
+    IdealProcessor = IdealProcessor + 2 % MaxProcs;
 
     QUIC_THREAD_CONFIG ThreadConfig = {
         ThreadFlags,
@@ -718,7 +721,7 @@ QuicWorkerPoolInitialize(
     //
 
     for (uint16_t i = 0; i < WorkerCount; i++) {
-        Status = QuicWorkerInitialize(Owner, ThreadFlags, (i + 2) % WorkerCount, &WorkerPool->Workers[i]);
+        Status = QuicWorkerInitialize(Owner, ThreadFlags, i, WorkerCount, &WorkerPool->Workers[i]);
         if (QUIC_FAILED(Status)) {
             for (uint16_t j = 0; j < i; j++) {
                 QuicWorkerUninitialize(&WorkerPool->Workers[j]);
