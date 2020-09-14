@@ -2104,7 +2104,7 @@ QuicDataPathSocketReceive(
                     goto Drop;
                 }
 
-                if (RecvContext->ProcContext->OutstandingPendingBytes >= PENDING_BUFFER_LIMIT) {
+                if (TRUE) {
                     //
                     // Perform a copy
                     //
