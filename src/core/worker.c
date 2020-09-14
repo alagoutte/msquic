@@ -73,7 +73,7 @@ QuicWorkerInitialize(
         goto Error;
     }
 
-    IdealProcessor = IdealProcessor + 2 % MaxProcs;
+    IdealProcessor = (IdealProcessor + 2) % MaxProcs;
 
     QUIC_THREAD_CONFIG ThreadConfig = {
         ThreadFlags,
