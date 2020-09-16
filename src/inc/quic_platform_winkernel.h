@@ -802,16 +802,16 @@ QuicThreadCreate(
                 goto Cleanup;
             }
         }
-        Status =
-            ZwSetInformationThread(
-                ThreadHandle,
-                ThreadIdealProcessorEx,
-                &IdealProcessor, // Don't pass in Processor because this overwrites on output.
-                sizeof(IdealProcessor));
-        QUIC_DBG_ASSERT(QUIC_SUCCEEDED(Status));
-        if (QUIC_FAILED(Status)) {
-            goto Cleanup;
-        }
+        // Status =
+        //     ZwSetInformationThread(
+        //         ThreadHandle,
+        //         ThreadIdealProcessorEx,
+        //         &IdealProcessor, // Don't pass in Processor because this overwrites on output.
+        //         sizeof(IdealProcessor));
+        // QUIC_DBG_ASSERT(QUIC_SUCCEEDED(Status));
+        // if (QUIC_FAILED(Status)) {
+        //     goto Cleanup;
+        // }
     }
     if (Config->Flags & QUIC_THREAD_FLAG_HIGH_PRIORITY) {
         KeSetBasePriorityThread(

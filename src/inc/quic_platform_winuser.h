@@ -807,9 +807,9 @@ QuicThreadCreate(
         }
         Group.Group = ProcInfo->Group;
         SetThreadGroupAffinity(*Thread, &Group, NULL);
-        if (!(Config->Flags & QUIC_THREAD_FLAG_SET_AFFINITIZE)) {
-            SetThreadIdealProcessor(*Thread, ProcInfo->Index);
-        }
+        // if (!(Config->Flags & QUIC_THREAD_FLAG_SET_AFFINITIZE)) {
+        //     SetThreadIdealProcessor(*Thread, ProcInfo->Index);
+        // }
     }
     if (Config->Flags & QUIC_THREAD_FLAG_HIGH_PRIORITY) {
         SetThreadPriority(*Thread, THREAD_PRIORITY_HIGHEST);
